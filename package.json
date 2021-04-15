@@ -1,0 +1,21 @@
+{
+  "name": "bed",
+  "email": "koenhaagsma123@hotmail.nl",
+  "url": "https://github.com/KoenHaagsma",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "node": "^15.14.0",
+    "nodemon": "^2.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/index.js",
+    "dev": "nodemon ./src/index.js"
+  },
+  "author": "Koen Haagsma",
+  "license": "ISC"
+}
