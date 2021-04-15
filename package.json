@@ -6,7 +6,9 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "chalk": "^4.1.0",
     "express": "^4.17.1",
+    "handlebars": "^4.7.7",
     "node": "^15.14.0"
   },
   "devDependencies": {
