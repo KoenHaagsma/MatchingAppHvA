@@ -21,8 +21,9 @@ app.set("view engine", "pug");
 
 // Serving static files (CSS, IMG, JS.)
 app.use(
+    "/assets",
     express.static(
-        __dirname + "/public"
+        path.join(__dirname, "public")
     )
 );
 // Assuming: http://localhost:port/public
@@ -30,6 +31,10 @@ app.use(
 // Home Route
 app.get("/", (req, res) => {
     res.render("index");
+});
+
+app.get("/login", (req, res) => {
+    res.render("login");
 });
 
 // Handling 404

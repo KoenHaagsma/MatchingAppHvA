@@ -1,1 +1,19 @@
-h1 Hello world
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title Pug page
+    body
+        h1 Hello, World!
+        p | Welcome to my Pug backend site.
+        
+        - let user = {name: "Koen", loggedIn: false, lastLogin: 5}
+        
+        if user.loggedIn
+            include includes/loggedIn.pug
+
+        if !user.loggedIn
+            include includes/LoggedOut.pug
+        
+        // including footer
+        include includes/footer.pug
