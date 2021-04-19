@@ -22,6 +22,11 @@ app.get("/", (req, res) => {
     res.render("index");
 });
 
+// Handling 404
+app.use(function (req, res, next) {
+    res.status(404).render("404");
+});
+
 // Start Server
 app.listen(port, () => {
     console.log(
