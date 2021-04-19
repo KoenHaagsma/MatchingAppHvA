@@ -27,6 +27,7 @@ Setup & Github commit.
 
 -   https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 -   https://expressjs.com/en/starter/faq.html
+-   https://expressjs.com/en/starter/static-files.html
 
 ## Any thoughts?
 
