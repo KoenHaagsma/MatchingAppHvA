@@ -17,7 +17,7 @@ app.set(
 );
 app.set("view engine", "pug");
 
-// Serving static files (CSS, IMG, JS.)
+// Serving static files (CSS, IMG, JS, etc.)
 app.use(
     "/assets",
     express.static(
