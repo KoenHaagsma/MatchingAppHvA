@@ -2,10 +2,13 @@ doctype
 html(lang='en')
     head
         meta(charset='utf-8')
+        style
+            include ../public/css/style.css
+
         title Pug page
     body
         h1 Hello, World!
-        p | Welcome to my Pug backend site.
+        p Welcome to my Pug backend site.
         
         - let user = {name: "Koen", loggedIn: true, lastLogin: 5}
         

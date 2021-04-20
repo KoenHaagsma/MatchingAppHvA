@@ -8,7 +8,7 @@ const path = require("path");
 
 // Init app
 const app = express();
-const port = 3002;
+const port = 1337;
 
 // Load view engine | Path: Directory name + map name.
 app.set(
