@@ -2,8 +2,6 @@
 const express = require("express");
 const chalk = require("chalk");
 const pug = require("pug");
-// Not sure if i have to import this or if it's included within express.js
-const serveStatic = require("serve-static");
 
 // Using path, doesn't have to be imported to use | Makes life easier when using Path
 const path = require("path");
