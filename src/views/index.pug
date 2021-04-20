@@ -7,7 +7,7 @@ html(lang='en')
         h1 Hello, World!
         p | Welcome to my Pug backend site.
         
-        - let user = {name: "Koen", loggedIn: false, lastLogin: 5}
+        - let user = {name: "Koen", loggedIn: true, lastLogin: 5}
         
         if user.loggedIn
             include includes/loggedIn.pug

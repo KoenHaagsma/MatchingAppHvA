@@ -26,7 +26,7 @@ app.use(
         path.join(__dirname, "public")
     )
 );
-// Assuming: http://localhost:port/public
+// Assuming: http://localhost:port/assets
 
 // Home Route
 app.get("/", (req, res) => {
