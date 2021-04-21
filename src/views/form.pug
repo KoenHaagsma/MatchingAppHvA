@@ -6,11 +6,15 @@ html(lang='en')
     body
         form(action = '/', method = 'POST')
             div
-                label(for="Firstname") Firstname:
-                input(name = "Firstname" value = "Koen")
+                label(for="title") Title:
+                input(name="title")
+            br
+            div
+                label(for="plot") Plot (short):
+                    input(name="plot")
             br
             div 
-                label(for="Lastname") Lastname:
-                input(name = "Lastname" value = "Haagsma")
+                label(for="description") Description (long):
+                textarea(name="description" rows=5)
             br
-            button(type="submit") Send my name
+            button(type="submit") Add

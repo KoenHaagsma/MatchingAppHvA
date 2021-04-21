@@ -1,11 +1,11 @@
 // Requirements
 const express = require("express");
-const router = express.Router();
 const pug = require("pug");
 const chalk = require("chalk");
 const multer = require("multer");
 const upload = multer();
 const dotenv = require("dotenv");
+const slug = require("slug");
 
 // Using path, doesn't have to be imported to use | Makes life easier when using Path
 const path = require("path");
@@ -28,15 +28,26 @@ app.use(
     })
 );
 
-app.post(
-    "/",
-    function (req, res, next) {
-        console.log(req.body);
-        res.send(
-            "Recieved your request"
-        );
-    }
-);
+app.post("/", add);
+
+let data;
+
+// temporary functions
+function add(req, res) {
+    let id = slug(req.body.title);
+
+    data = {
+        id: id,
+        title: req.body.title,
+        plot: req.body.plot,
+        description:
+            req.body.description,
+    };
+
+    console.log(data);
+
+    res.redirect("/" + id);
+}
 
 // Serving static files (CSS, IMG, JS, etc.)
 app.use(
@@ -45,24 +56,31 @@ app.use(
         path.join(__dirname, "public")
     )
 );
-// Assuming: http://localhost:port/assets
 
+// Routes
 // Home Route
 app.get("/", (req, res) => {
     res.render("index");
 });
 
+// Login Route
 app.get("/login", (req, res) => {
     res.render("login");
 });
 
+// Test Form Route
 app.get("/form", (req, res) => {
     res.render("form");
+});
+
+app.get("/:id", (req, res) => {
+    res.render("article", data);
 });
 
 // Handling 404
 app.use(function (req, res, next) {
     res.status(404).render("404");
+    next();
 });
 
 // Start Server
