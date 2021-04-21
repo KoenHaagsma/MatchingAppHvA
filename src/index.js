@@ -1,7 +1,7 @@
 // Requirements
 const express = require("express");
-const chalk = require("chalk");
 const pug = require("pug");
+const chalk = require("chalk");
 
 // Using path, doesn't have to be imported to use | Makes life easier when using Path
 const path = require("path");
