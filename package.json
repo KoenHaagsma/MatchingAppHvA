@@ -3,7 +3,7 @@
   "email": "koenhaagsma123@hotmail.nl",
   "url": "https://github.com/KoenHaagsma",
   "version": "1.0.0",
-  "description": "MatchingAppHvA that matches on code interests.",
+  "description": "Matching app that matches on code interests.",
   "main": "index.js",
   "dependencies": {
     "chalk": "^4.1.0",
