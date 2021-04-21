@@ -1,7 +1,11 @@
 // Requirements
 const express = require("express");
+const router = express.Router();
 const pug = require("pug");
 const chalk = require("chalk");
+const multer = require("multer");
+const upload = multer();
+const dotenv = require("dotenv");
 
 // Using path, doesn't have to be imported to use | Makes life easier when using Path
 const path = require("path");
@@ -16,6 +20,23 @@ app.set(
     path.join(__dirname, "views")
 );
 app.set("view engine", "pug");
+
+app.use(express.json());
+app.use(
+    express.urlencoded({
+        extended: true,
+    })
+);
+
+app.post(
+    "/",
+    function (req, res, next) {
+        console.log(req.body);
+        res.send(
+            "Recieved your request"
+        );
+    }
+);
 
 // Serving static files (CSS, IMG, JS, etc.)
 app.use(
@@ -33,6 +54,10 @@ app.get("/", (req, res) => {
 
 app.get("/login", (req, res) => {
     res.render("login");
+});
+
+app.get("/form", (req, res) => {
+    res.render("form");
 });
 
 // Handling 404

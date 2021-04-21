@@ -1,0 +1,16 @@
+doctype
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title Form Tester
+    body
+        form(action = '/', method = 'POST')
+            div
+                label(for="Firstname") Firstname:
+                input(name = "Firstname" value = "Koen")
+            br
+            div 
+                label(for="Lastname") Lastname:
+                input(name = "Lastname" value = "Haagsma")
+            br
+            button(type="submit") Send my name
