@@ -2,8 +2,8 @@
 const express = require("express");
 const pug = require("pug");
 const chalk = require("chalk");
-const multer = require("multer");
-const upload = multer();
+// const multer = require("multer");
+// const upload = multer();
 const dotenv = require("dotenv");
 const slug = require("slug");
 
@@ -28,11 +28,11 @@ app.use(
     })
 );
 
-app.post("/", add);
+app.post("/article", add);
 
 let data;
 
-// temporary functions
+// tryouts
 function add(req, res) {
     let id = slug(req.body.title);
 
@@ -45,8 +45,7 @@ function add(req, res) {
     };
 
     console.log(data);
-
-    res.redirect("/" + id);
+    res.render("article", data);
 }
 
 // Serving static files (CSS, IMG, JS, etc.)
@@ -73,10 +72,6 @@ app.get("/form", (req, res) => {
     res.render("form");
 });
 
-app.get("/:id", (req, res) => {
-    res.render("article", data);
-});
-
 // Handling 404
 app.use(function (req, res, next) {
     res.status(404).render("404");
@@ -86,7 +81,7 @@ app.use(function (req, res, next) {
 // Start Server
 app.listen(port, () => {
     console.log(
-        chalk.red(
+        chalk.blue(
             `Listening at http://localhost:${port}`
         )
     );
