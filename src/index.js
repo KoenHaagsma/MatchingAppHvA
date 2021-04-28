@@ -2,23 +2,47 @@
 const express = require("express");
 const pug = require("pug");
 const chalk = require("chalk");
-// const multer = require("multer");
-// const upload = multer();
-const dotenv = require("dotenv");
+require("dotenv").config();
 const slug = require("slug");
-
-// Using path, doesn't have to be imported to use | Makes life easier when using Path
 const path = require("path");
+// const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
 // Init app
 const app = express();
-const port = 1337;
+const port = process.env.PORT;
+
+// Connecting to MongoDB
+const uri = process.env.DATABASE;
+
+mongoose.connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+
+const db = mongoose.connection;
+db.on(
+    "error",
+    console.error.bind(
+        console,
+        chalk.red("connection error:")
+    )
+);
+
+db.once("open", function () {
+    console.log(
+        chalk.yellow(
+            "Database connection established"
+        )
+    );
+});
 
 // Load view engine | Path: Directory name + map name.
 app.set(
     "views",
     path.join(__dirname, "views")
 );
+
 app.set("view engine", "pug");
 
 app.use(express.json());
