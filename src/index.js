@@ -5,7 +5,8 @@ const chalk = require("chalk");
 require("dotenv").config();
 const slug = require("slug");
 const path = require("path");
-// const bodyParser = require("body-parser");
+const bodyParser = require("body-parser");
+const multer = require("multer");
 const mongoose = require("mongoose");
 
 // Init app
@@ -31,7 +32,7 @@ db.on(
 
 db.once("open", function () {
     console.log(
-        chalk.yellow(
+        chalk.greenBright(
             "Database connection established"
         )
     );
@@ -45,9 +46,9 @@ app.set(
 
 app.set("view engine", "pug");
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(
-    express.urlencoded({
+    bodyParser.urlencoded({
         extended: true,
     })
 );
