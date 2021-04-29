@@ -7,9 +7,19 @@ const chalk = require("chalk");
 require("dotenv").config();
 const path = require("path");
 const mongoose = require("mongoose");
+
+// Loading in Mongoose connection
 const connectDBMongoose = require("./config/mongoose");
+
+// Loading in Models
+const User = require("./models/user");
+
+// Loading in Routes
 const index = require("./routes/index");
 const form = require("./routes/form");
+const {
+    bgYellowBright,
+} = require("chalk");
 
 // Init app
 const app = express();
@@ -59,6 +69,22 @@ app.use(
 // Home Route
 app.use("/", index);
 app.use("/form", form);
+
+// Trying out mongoose
+app.get("/add-user", (req, res) => {
+    const user = new User({
+        firstName: "Koen",
+        lastName: "Haagsma",
+    });
+
+    user.save()
+        .then((result) => {
+            res.send(result);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
 
 // Handling 404
 app.use(function (req, res, next) {
