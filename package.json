@@ -17,13 +17,13 @@
     "slug": "^4.0.4"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7",
-    "node-sass": "^5.0.0"
+    "concurrently": "^6.0.2",
+    "node-sass": "^5.0.0",
+    "nodemon": "^2.0.7"
   },
   "scripts": {
     "start": "node ./src/index.js",
-    "dev": "nodemon ./src/index.js",
-    "sass": "node-sass src/scss/app.scss src/public/css/style.css -w"
+    "dev": "concurrently \"nodemon ./src/index.js\" \"node-sass src/scss/app.scss src/public/css/style.css -w\""
   },
   "author": "Koen Haagsma",
   "license": "MIT"

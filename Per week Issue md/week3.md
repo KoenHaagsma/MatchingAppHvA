@@ -14,15 +14,19 @@ https://github.com/KoenHaagsma/MatchingAppHvA
 
 ## Summary
 
-Setup & Github commit.
+Opzetten van CRUD, CR werkt lokaal alleen U & D werken niet lokaal wil dit meteen gaan doen met de database.
+Database opgezet en verschillende dingetjes geprobeerd.
+Models en Routes toegevoegd om straks met mongoose te gebruiken.
 
 ## Resources used
 
--   https://www.tutorialspoint.com/expressjs/expressjs_form_data.htm
--   https://codeforgeek.com/handle-get-post-request-express-4/
--   https://expressjs.com/en/guide/using-middleware.html
--   https://developer.mozilla.org/en-US/docs/Learn/Forms/Sending_forms_through_JavaScript
+-   https://medium.com/@etiennerouzeaud/how-create-an-api-restfull-in-express-node-js-without-database-b030c687e2ea
+-   https://zellwk.com/blog/crud-express-mongodb/
+-   https://medium.com/swlh/tutorial-build-a-restful-api-with-crud-functionality-using-node-js-express-js-mongodb-4a1aa6eb4de6
 
 ## Any thoughts?
 
-Find it easy to do, it was not the first time for me.
+Moeilijk om update en delete toe te passen, denk vooral omdat het nog niet met een database moest, daarom ook daarmee gewacht
+en dit toepassen als er een database is.
+
+Deze connectie ondertussen gemaakt dus het moet lukken.
