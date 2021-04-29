@@ -1,6 +1,8 @@
-@import "abstracts/all";
-@import "components/all";
-@import "core/all";
-@import "layout/all";
-@import "pages/all";
-@import "sections/all";
+@import "abstracts/variables";
+@import "core/typography";
+
+$import: #ffffff;
+
+body {
+    background-color: $import;
+}
