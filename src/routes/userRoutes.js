@@ -59,13 +59,15 @@ router.get("/edit/:id", function (req, res) {
     });
 });
 
-router.post("/add/:id", (req, res) => {
+// Update user
+router.post("/edit/:id", (req, res) => {
     let user = {};
 
     user.firstName = req.body.firstName;
     user.lastName = req.body.lastName;
 
     let query = { _id: req.params.id };
+    console.log(query);
 
     userModel.updateOne(query, user, (err) => {
         if (err) {
@@ -82,7 +84,7 @@ router.post("/add/:id", (req, res) => {
 router.delete("/:id", function (req, res) {
     let query = { _id: req.params.id };
 
-    userModel.removeOne(query, function (err) {
+    userModel.deleteOne(query, (err) => {
         if (err) {
             console.error(err);
             return;
