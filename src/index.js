@@ -1,38 +1,30 @@
 // Requirements
-// const slug = require("slug");
-// const multer = require("multer");
 const express = require("express");
 const pug = require("pug");
 const chalk = require("chalk");
 require("dotenv").config();
 const path = require("path");
-const mongoose = require("mongoose");
+const session = require("express-session");
+const expressValidator = require("express-validator");
 
 // Loading in Mongoose connection
 const connectDBMongoose = require("./config/mongoose");
 
-// Loading in Models
-const User = require("./models/user");
+// User model
+const User = require("./models/User");
 
 // Loading in Routes
-const index = require("./routes/index");
-const form = require("./routes/form");
-const {
-    bgYellowBright,
-} = require("chalk");
+const userRoutes = require("./routes/userRoutes");
 
 // Init app
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 1337;
 
 // Connecting to MongoDB
 connectDBMongoose();
 
 // Load view engine | Path: Directory name + map name.
-app.set(
-    "views",
-    path.join(__dirname, "views")
-);
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
 // Instead of Body-parser
@@ -43,51 +35,77 @@ app.use(
     })
 );
 
-app.post("/user", add);
-
-// tryouts ----------------------
-function add(req, res) {
-    const data = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-    };
-
-    console.log(data);
-    res.render("user", data);
-}
-//-------------------------------
-
 // Serving static files (CSS, IMG, JS, etc.)
 app.use(
     "/assets",
-    express.static(
-        path.join(__dirname, "public")
-    )
+    express.static(path.join(__dirname, "public"))
+);
+
+// Used validation from: https://github.com/elvc/node_express_pug_mongo/blob/master/app.js
+
+// Session middleware
+app.use(
+    session({
+        cookie: { maxAge: 60000 },
+        secret: "woot",
+        resave: true,
+        saveUninitialized: true,
+    })
+);
+
+// Messages middleware
+app.use(require("connect-flash")());
+app.use(function (req, res, next) {
+    res.locals.messages = require("express-messages")(
+        req,
+        res
+    );
+    next();
+});
+
+// Validator middleware, had to degrade to older version of expressValidator because it said expressValidator is not a function
+// https://stackoverflow.com/questions/56733975/express-validator-error-expressvalidator-is-not-a-function
+// https://github.com/express-validator/express-validator/issues/735
+
+app.use(
+    expressValidator({
+        errorFormatter: function (param, msg, value) {
+            var namespace = param.split("."),
+                root = namespace.shift(),
+                formParam = root;
+
+            while (namespace.length) {
+                formParam += "[" + namespace.shift() + "]";
+            }
+            return {
+                param: formParam,
+                msg: msg,
+                value: value,
+            };
+        },
+    })
 );
 
 // Routes
 // Home Route
-app.use("/", index);
-app.use("/form", form);
-
-// Trying out mongoose
-app.get("/add-user", (req, res) => {
-    const user = new User({
-        firstName: "Koen",
-        lastName: "Haagsma",
+app.get("/", (req, res) => {
+    User.find({}, (err, users) => {
+        if (err) {
+            res.status(404).render("404");
+        } else {
+            res.render("index", {
+                title: "Users",
+                users: users,
+            });
+        }
     });
-
-    user.save()
-        .then((result) => {
-            res.send(result);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
 });
 
+// All routes that have something to do with users
+app.use("/users", userRoutes);
+
 // Handling 404
-app.use(function (req, res, next) {
+app.use((req, res, next) => {
     res.status(404).render("404");
     next();
 });
@@ -95,8 +113,6 @@ app.use(function (req, res, next) {
 // Start Server
 app.listen(port, () => {
     console.log(
-        chalk.blue(
-            `Listening at http://localhost:${port}`
-        )
+        chalk.blue(`Listening at http://localhost:${port}`)
     );
 });

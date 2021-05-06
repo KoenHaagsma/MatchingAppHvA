@@ -1,0 +1,19 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title MatchingApp
+        style
+            include ../public/css/style.css
+        
+    body
+        header
+            nav
+        main
+            h1 Matching App programmers
+            if errors
+                each error, i in errors
+                    div #{error.msg}
+            block content
+        footer
+            include includes/footer.pug
