@@ -1,0 +1,15 @@
+extends layout 
+
+block content
+    h2 #{title}
+    form(method='POST', action=`/users/edit/${user._id}`)
+        .form
+            label First Name: 
+            input(name='firstName', type='text' value=user.firstName)
+            br
+            br
+            label Last name: 
+            input(name='lastName', type='text' value=user.lastName)
+        br
+        input(type='submit', value='Verstuur')
+            

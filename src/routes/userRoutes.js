@@ -9,6 +9,7 @@ router.get("/add", (req, res) => {
     });
 });
 
+// Validation from: https://github.com/elvc/node_express_pug_mongo
 // POST User to database
 router.post("/add", (req, res) => {
     req.checkBody(
@@ -21,7 +22,6 @@ router.post("/add", (req, res) => {
     ).notEmpty();
 
     // Get the errors
-    console.log(req.validationErrors());
     let errors = req.validationErrors();
 
     if (errors) {
@@ -47,6 +47,59 @@ router.post("/add", (req, res) => {
             }
         });
     }
+});
+
+// Load edit form
+router.get("/edit/:id", function (req, res) {
+    userModel.findById(req.params.id, function (err, user) {
+        res.render("edit_user", {
+            title: "Edit User",
+            user: user,
+        });
+    });
+});
+
+router.post("/add/:id", (req, res) => {
+    let user = {};
+
+    user.firstName = req.body.firstName;
+    user.lastName = req.body.lastName;
+
+    let query = { _id: req.params.id };
+
+    userModel.updateOne(query, user, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            req.flash("success", "User is updated!");
+            res.redirect("/");
+        }
+    });
+});
+
+// Delete user
+router.delete("/:id", function (req, res) {
+    let query = { _id: req.params.id };
+
+    userModel.removeOne(query, function (err) {
+        if (err) {
+            console.error(err);
+            return;
+        } else {
+            req.flash("success", "User Deleted");
+            res.redirect("/");
+        }
+    });
+});
+
+// GET single user
+router.get("/:id", function (req, res) {
+    userModel.findById(req.params.id, function (err, user) {
+        res.render("user", {
+            user: user,
+        });
+    });
 });
 
 module.exports = router;

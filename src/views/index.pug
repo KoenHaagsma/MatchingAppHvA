@@ -5,4 +5,10 @@ block content
         each user, i in users
             article 
                 li
-                    p #{user.firstName} #{user.lastName}
+                    a(href=`/users/${user._id}`) #{user.firstName} #{user.lastName}
+                    br
+                    a(href=`/users/edit/${user._id}`) Edit 
+                    br
+                    a(href='#', data-id=user._id) Delete
+                    br
+                    br
