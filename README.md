@@ -2,11 +2,25 @@
 
 ## Overzicht
 
+Dit is mijn matching app feature voor project tech, mijn feature moet uiteindelijk gedeelte gaan worden van een groter geheel dat uiteindelijk een hele matching app moet gaan worden.
+Dit doen we in groepjes i.p.v. individueel.
+In deze readme lees je wat er gebruikt is en hoe je dit installeert, ook zijn er verwijzingen naar mijn wiki voor wat diepere informatie.
+
 ## Table of contents
+
+-   [Opdracht](##Opdracht)
+-   [Concept](##Concept)
+-   [Installatie](##Installatie)
+-   [Packages/Dependecies](##Packages/dependecies)
+-   [License](##License)
 
 ## Opdracht
 
+De opdracht is om een matching app te maken en dan niet de standaard matching app waar meteen iedereen aan denk zoals Tinder. Nee je mag zelf bepalen waarop je gaat matchen en hoe je dat gaat doen. Eerst ga je zelf een feature uitwerken die in zo'n app zou kunnen zitten en daarna ga je in een groep met meerdere studenten de hele applicatie in elkaar zetten, zodat het uiteindelijk één geheel is die goed functioneerd en er verzorgt uit ziet.
+
 ## Concept
+
+De feature die ik zelf wil gaan uitwerken is een feature waarin je mensen kan zien die overeenkomen met jouw interesses, er moet nog een bottom line bedacht worden en hoe mensen gematched worden. Hiervoor ga ik kijken naar verschillende methoden om mensen te matchen, maar ik denk dat ik het ga doen op basis van code interests & framework interests, hierdoor worden programmeurs gematched aan mensen die dezelfde interesses hebben op basis van code.
 
 ## Installatie
 
@@ -33,25 +47,25 @@
 
 ### dependecies
 
--   [body-parser]()
--   [chalk]()
--   [connect-flash]()
--   [dotenv]()
--   [express]()
--   [express-messages]()
--   [express-session]()
--   [express-validator]()
--   [mongoose]()
--   [multer]()
--   [node]()
--   [pug]()
--   [slug]()
+-   [body-parser](https://www.npmjs.com/package/body-parser)
+-   [chalk](https://www.npmjs.com/package/chalk)
+-   [connect-flash](https://www.npmjs.com/package/connect-flash)
+-   [dotenv](https://www.npmjs.com/package/dotenv)
+-   [express](https://www.npmjs.com/package/express)
+-   [express-messages](https://www.npmjs.com/package/express-messages)
+-   [express-session](https://www.npmjs.com/package/express-session)
+-   [express-validator](https://www.npmjs.com/package/express-validator)
+-   [mongoose](https://www.npmjs.com/package/mongoose)
+-   [multer](https://www.npmjs.com/package/multer)
+-   [node](https://www.npmjs.com/package/node)
+-   [pug](https://www.npmjs.com/package/pug)
+-   [slug](https://www.npmjs.com/package/slug)
 
 ### dev dependecies
 
--   [concurrently]()
--   [node-sass]()
--   [nodemon]()
+-   [concurrently](https://www.npmjs.com/package/concurrently)
+-   [node-sass](https://www.npmjs.com/package/node-sass)
+-   [nodemon](https://www.npmjs.com/package/nodemon)
 
 ## License
 
