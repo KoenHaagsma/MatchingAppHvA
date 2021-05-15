@@ -1,3 +1,5 @@
+//TODO: Update to what i want.
+
 const express = require("express");
 const userModel = require("../models/User");
 const router = express.Router();
@@ -80,6 +82,7 @@ router.post("/edit/:id", (req, res) => {
     });
 });
 
+// TODO: Has to work yet
 // Delete user
 router.delete("/:id", function (req, res) {
     let query = { _id: req.params.id };
