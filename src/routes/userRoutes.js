@@ -86,6 +86,7 @@ router.post("/edit/:id", (req, res) => {
 // Delete user
 router.delete("/:id", function (req, res) {
     let query = { _id: req.params.id };
+    console.log(query);
 
     userModel.deleteOne(query, (err) => {
         if (err) {

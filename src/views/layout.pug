@@ -2,15 +2,14 @@ doctype html
 html(lang='en')
     head
         meta(charset='utf-8')
-        title MatchingApp
+        title Matches
         style
             include ../public/css/style.css
-        
     body
         header
-            nav
+            include includes/header.pug
         main
-            h1 Matching App programmers
+            h1 Jouw matches
             if errors
                 each error, i in errors
                     div(class='alerts') #{error.msg}            
