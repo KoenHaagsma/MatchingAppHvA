@@ -6,70 +6,87 @@ html {
   color: white;
   margin: 0px 32px; }
 
+@media screen and (min-width: 1199px) {
+  html {
+    margin: 0 225px; } }
+
 main {
   margin-top: 24px; }
   main section h1 {
-    width: 70%;
+    width: 100%;
     font-weight: 500;
     font-size: 24px;
     line-height: 36px;
     border-bottom: 2px solid #e94560; }
   main section section {
     margin-top: 24px; }
-    main section section ul {
+    main section section .match-article-container {
+      justify-content: center;
+      align-items: center;
+      list-style-type: none;
+      display: flex;
+      flex-wrap: wrap;
       margin: 0;
-      padding: 0;
-      list-style-type: none; }
-      main section section ul .match-article {
-        margin-top: 18px;
+      padding: 0; }
+      main section section .match-article-container ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0; }
+      main section section .match-article-container .match-article {
+        max-width: 350px;
+        margin: 18px;
         padding: 12px;
         border: 1px solid white;
         border-radius: 8px; }
-        main section section ul .match-article h2 {
+        main section section .match-article-container .match-article h2 {
           padding: 0;
           margin: 0; }
-          main section section ul .match-article h2 a {
+          main section section .match-article-container .match-article h2 a {
             color: white;
             text-decoration: none !important;
             font-size: 18px;
             line-height: 27px; }
-        main section section ul .match-article .code {
+        main section section .match-article-container .match-article .code {
           border-radius: 4px;
           background-color: #16213e;
           padding: 7px 12px;
           margin: 10px 0px;
-          font-size: 12px;
+          font-size: 12px !important;
           line-height: 18px;
           font-weight: 300;
           color: #ffdf37; }
-        main section section ul .match-article .code-taal ul {
-          display: flex; }
-          main section section ul .match-article .code-taal ul div {
+        main section section .match-article-container .match-article .code-taal {
+          margin-top: 14px;
+          padding: 8px; }
+          main section section .match-article-container .match-article .code-taal ul {
+            display: flex; }
+            main section section .match-article-container .match-article .code-taal ul div {
+              display: flex;
+              flex-direction: column; }
+              main section section .match-article-container .match-article .code-taal ul div p {
+                font-size: 10px;
+                font-weight: 300;
+                line-height: 15px; }
+          main section section .match-article-container .match-article .code-taal .meerLezen-container {
             display: flex;
-            flex-direction: column; }
-            main section section ul .match-article .code-taal ul div p {
-              font-size: 10px;
-              font-weight: 300;
-              line-height: 15px; }
-        main section section ul .match-article .code-taal .meerLezen-container {
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-end; }
-          main section section ul .match-article .code-taal .meerLezen-container button {
-            font-weight: bold !important;
-            cursor: pointer;
-            font-size: 16px;
-            border-radius: 4px;
-            border: 2px solid #e94560;
-            background-color: transparent;
-            color: #e94560;
-            padding: 8px 12px; }
-        main section section ul .match-article .button-container {
+            flex-direction: row;
+            justify-content: center; }
+            main section section .match-article-container .match-article .code-taal .meerLezen-container button {
+              margin-top: 12px;
+              font-weight: bold !important;
+              cursor: pointer;
+              font-size: 16px;
+              border-radius: 4px;
+              border: 2px solid #e94560;
+              background-color: transparent;
+              color: #e94560;
+              padding: 8px 12px; }
+        main section section .match-article-container .match-article .button-container {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           margin-top: 12px; }
-          main section section ul .match-article .button-container button {
+          main section section .match-article-container .match-article .button-container button {
             font-weight: bold !important;
             cursor: pointer;
             font-size: 16px;
@@ -78,36 +95,38 @@ main {
             padding: 8px 12px;
             color: white;
             border: none; }
-          main section section ul .match-article .button-container .negeer {
+          main section section .match-article-container .match-article .button-container .negeer {
             background-color: #e94560; }
-          main section section ul .match-article .button-container .accepteer {
+          main section section .match-article-container .match-article .button-container .accepteer {
             background-color: #5ce945; }
 
-header nav {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around; }
-  header nav img {
-    padding: 12px; }
-  header nav ul {
-    justify-content: space-around;
+header {
+  margin-top: 12px; }
+  header nav {
     display: flex;
     flex-direction: row;
-    list-style-type: none;
-    padding: 0;
-    margin: 0; }
-    header nav ul li {
+    justify-content: space-around; }
+    header nav img {
       padding: 12px; }
-      header nav ul li a {
-        font-weight: bold !important;
-        text-decoration: none;
-        font-size: 12px;
-        color: white; }
-    header nav ul li:active,
-    header nav ul li:hover,
-    header nav ul li:focus {
-      border-radius: 8px;
-      background-color: #e94560; }
+    header nav ul {
+      justify-content: space-around;
+      display: flex;
+      flex-direction: row;
+      list-style-type: none;
+      padding: 0;
+      margin: 0; }
+      header nav ul li {
+        padding: 12px; }
+        header nav ul li a {
+          font-weight: bold !important;
+          text-decoration: none;
+          font-size: 12px;
+          color: white; }
+      header nav ul li:active,
+      header nav ul li:hover,
+      header nav ul li:focus {
+        border-radius: 8px;
+        background-color: #e94560; }
 
 @font-face {
   font-family: poppins, sans-serif;

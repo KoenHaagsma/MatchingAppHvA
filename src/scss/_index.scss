@@ -2,7 +2,7 @@ main {
     margin-top: 24px;
     section {
         h1 {
-            width: 70%;
+            width: 100%;
             font-weight: 500;
             font-size: 24px;
             line-height: 36px;
@@ -10,12 +10,22 @@ main {
         }
         section {
             margin-top: 24px;
-            ul {
+            .match-article-container {
+                justify-content: center;
+                align-items: center;
+                list-style-type: none;
+                display: flex;
+                flex-wrap: wrap;
                 margin: 0;
                 padding: 0;
-                list-style-type: none;
+                ul {
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                }
                 .match-article {
-                    margin-top: 18px;
+                    max-width: 350px;
+                    margin: 18px;
                     padding: 12px;
                     border: 1px solid $text-color-white;
                     border-radius: 8px;
@@ -34,12 +44,14 @@ main {
                         background-color: $dark-secondary-color;
                         padding: 7px 12px;
                         margin: 10px 0px;
-                        font-size: 12px;
+                        font-size: 12px !important;
                         line-height: 18px;
                         font-weight: 300;
                         color: $code-color;
                     }
                     .code-taal {
+                        margin-top: 14px;
+                        padding: 8px;
                         ul {
                             display: flex;
                             div {
@@ -55,8 +67,9 @@ main {
                         .meerLezen-container {
                             display: flex;
                             flex-direction: row;
-                            justify-content: flex-end;
+                            justify-content: center;
                             button {
+                                margin-top: 12px;
                                 font-weight: bold !important;
                                 cursor: pointer;
                                 font-size: 16px;

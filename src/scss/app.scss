@@ -24,6 +24,12 @@ html {
     margin: 0px 32px;
 }
 
+@media screen and (min-width: $screen_size_large) {
+    html {
+        margin: 0 225px;
+    }
+}
+
 @import "index.scss";
 @import "layout.scss";
 @import "header.scss";
