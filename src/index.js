@@ -144,7 +144,6 @@ app.get("/", (req, res) => {
             res.render("index", {
                 title: "Users",
                 users: matchedUsers,
-                matched: matchedCount,
             });
         }
     });
