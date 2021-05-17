@@ -95,7 +95,7 @@ app.use(
 //         firstName: "Testing",
 //         lastName: "Goovert",
 //         code: "const code = 'I love code!'",
-//         codeInterests: ["HTML", "CSS"],
+//         codeInterests: ["PHP"],
 //     },
 // ])
 //     .then(function () {
@@ -109,8 +109,10 @@ let loggedInUser = {
     firstName: "Koen",
     lastName: "Haagsma",
     code: "const code = 'I love code!'",
-    codeInterests: ["HTML", "CSS", "JS", "PHP", "Vue"],
+    codeInterests: ["HTML", "CSS", "JS", "PHP", "VUE"],
 };
+
+// https://www.geeksforgeeks.org/how-to-find-if-two-arrays-contain-any-common-item-in-javascript/
 
 // Routes
 // Home Route
@@ -120,7 +122,7 @@ app.get("/", (req, res) => {
             res.status(404).render("404");
         } else {
             let matchedUsers = [];
-            function findCommonElements(arr1, arr2) {
+            function findCommonElements(arr2, arr1) {
                 return arr1.some((item) =>
                     arr2.includes(item)
                 );
@@ -141,9 +143,7 @@ app.get("/", (req, res) => {
                 ) {
                     return;
                 }
-                console.log(matchedUsers);
             });
-
             res.render("index", {
                 title: "Users",
                 users: matchedUsers,
