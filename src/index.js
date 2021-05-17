@@ -114,6 +114,8 @@ let loggedInUser = {
 
 // https://www.geeksforgeeks.org/how-to-find-if-two-arrays-contain-any-common-item-in-javascript/
 
+// Toevoegen dat als de user geliked is dat hij naar matches gaat maar dat hij uit de lijst van ontdekken verwijderd
+
 // Routes
 // Home Route
 app.get("/", (req, res) => {
@@ -135,18 +137,14 @@ app.get("/", (req, res) => {
                     )
                 ) {
                     matchedUsers.push(user);
-                } else if (
-                    !findCommonElements(
-                        loggedInUser.codeInterests,
-                        user.codeInterests
-                    )
-                ) {
+                } else {
                     return;
                 }
             });
             res.render("index", {
                 title: "Users",
                 users: matchedUsers,
+                matched: matchedCount,
             });
         }
     });

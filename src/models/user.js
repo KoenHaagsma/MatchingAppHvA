@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema(
         lastName: String,
         code: String,
         codeInterests: [String],
+        matched: [String],
     },
     { timestamps: true, typeKey: "$type" }
 );
