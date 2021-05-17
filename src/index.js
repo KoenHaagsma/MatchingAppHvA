@@ -11,7 +11,7 @@ const expressValidator = require("express-validator");
 const connectDBMongoose = require("./config/mongoose");
 
 // User model
-const User = require("/app/src/models/User");
+const User = require("./models/user");
 
 // Loading in Routes
 const userRoutes = require("./routes/userRoutes");
