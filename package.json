@@ -30,5 +30,8 @@
     "dev": "concurrently \"nodemon ./src/index.js\" \"node-sass src/scss/app.scss src/public/css/style.css -w\""
   },
   "author": "Koen Haagsma",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": "14.x"
+  }
 }
