@@ -5,6 +5,7 @@ const chalk = require("chalk");
 require("dotenv").config();
 const path = require("path");
 const session = require("express-session");
+const MemoryStore = require("memorystore")(session);
 const expressValidator = require("express-validator");
 
 // Loading in Mongoose connection
@@ -46,44 +47,48 @@ app.use(
 // Session middleware
 app.use(
     session({
+        cookie: { maxAge: 86400000 },
+        store: new MemoryStore({
+            checkPeriod: 86400000,
+        }),
         secret: "new_text",
         resave: true,
         saveUninitialized: true,
     })
 );
 
-// // Messages middleware
-// app.use(require("connect-flash")());
-// app.use(function (req, res, next) {
-//     res.locals.messages = require("express-messages")(
-//         req,
-//         res
-//     );
-//     next();
-// });
+// Messages middleware
+app.use(require("connect-flash")());
+app.use(function (req, res, next) {
+    res.locals.messages = require("express-messages")(
+        req,
+        res
+    );
+    next();
+});
 
 // Validator middleware, had to degrade to older version of expressValidator because it said expressValidator is not a function
 // https://stackoverflow.com/questions/56733975/express-validator-error-expressvalidator-is-not-a-function
 // https://github.com/express-validator/express-validator/issues/735
 
-// app.use(
-//     expressValidator({
-//         errorFormatter: function (param, msg, value) {
-//             var namespace = param.split("."),
-//                 root = namespace.shift(),
-//                 formParam = root;
+app.use(
+    expressValidator({
+        errorFormatter: function (param, msg, value) {
+            var namespace = param.split("."),
+                root = namespace.shift(),
+                formParam = root;
 
-//             while (namespace.length) {
-//                 formParam += "[" + namespace.shift() + "]";
-//             }
-//             return {
-//                 param: formParam,
-//                 msg: msg,
-//                 value: value,
-//             };
-//         },
-//     })
-// );
+            while (namespace.length) {
+                formParam += "[" + namespace.shift() + "]";
+            }
+            return {
+                param: formParam,
+                msg: msg,
+                value: value,
+            };
+        },
+    })
+);
 
 // Routes
 // Home Route
