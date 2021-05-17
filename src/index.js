@@ -90,6 +90,28 @@ app.use(
     })
 );
 
+// User.insertMany([
+//     {
+//         firstName: "Testing",
+//         lastName: "Goovert",
+//         code: "const code = 'I love code!'",
+//         codeInterests: ["HTML", "CSS"],
+//     },
+// ])
+//     .then(function () {
+//         console.log("Data inserted"); // Success
+//     })
+//     .catch(function (error) {
+//         console.log(error); // Failure
+//     });
+
+let loggedInUser = {
+    firstName: "Koen",
+    lastName: "Haagsma",
+    code: "const code = 'I love code!'",
+    codeInterests: ["HTML", "CSS", "JS", "PHP", "Vue"],
+};
+
 // Routes
 // Home Route
 app.get("/", (req, res) => {
@@ -97,9 +119,34 @@ app.get("/", (req, res) => {
         if (err) {
             res.status(404).render("404");
         } else {
+            let matchedUsers = [];
+            function findCommonElements(arr1, arr2) {
+                return arr1.some((item) =>
+                    arr2.includes(item)
+                );
+            }
+            users.forEach((user) => {
+                if (
+                    findCommonElements(
+                        loggedInUser.codeInterests,
+                        user.codeInterests
+                    )
+                ) {
+                    matchedUsers.push(user);
+                } else if (
+                    !findCommonElements(
+                        loggedInUser.codeInterests,
+                        user.codeInterests
+                    )
+                ) {
+                    return;
+                }
+                console.log(matchedUsers);
+            });
+
             res.render("index", {
                 title: "Users",
-                users: users,
+                users: matchedUsers,
             });
         }
     });

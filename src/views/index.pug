@@ -1,6 +1,7 @@
 extends layout 
 
 block content
+    h3 #{title}
     ul(class="match-article-container")
         each user, i in users
             article(class="match-article") 
@@ -27,8 +28,6 @@ block content
                                             p JS
                             div(class="meerLezen-container")
                                 button Meer lezen
-                        li: a(href=`/users/edit/${user._id}`) Edit 
-                        li: a(href='#', data-id=user._id) Delete
                     div(class="button-container")
                         button(class="negeer") Negeer
                         button(class="accepteer") Accepteer

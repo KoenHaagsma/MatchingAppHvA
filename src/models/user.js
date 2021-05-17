@@ -4,9 +4,10 @@ const userSchema = new mongoose.Schema(
     {
         firstName: String,
         lastName: String,
-        codeInterests: Array,
+        code: String,
+        codeInterests: [String],
     },
-    { timestamps: true }
+    { timestamps: true, typeKey: "$type" }
 );
 
 const User = mongoose.model("User", userSchema);
