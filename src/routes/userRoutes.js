@@ -1,7 +1,7 @@
 //TODO: Update to what i want.
 
 const express = require("express");
-const userModel = require("../models/User");
+const userModel = require("../models/user");
 const router = express.Router();
 
 // GET New user page
