@@ -4,7 +4,7 @@ const chalk = require("chalk");
 const connectDBMongoose = async () => {
     try {
         await mongoose.connect(
-            process.env.DATABASE,
+            `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster.hblwp.mongodb.net/MatchingApp?retryWrites=true&w=majority`,
             {
                 useNewUrlParser: true,
                 useCreateIndex: true,
@@ -19,9 +19,7 @@ const connectDBMongoose = async () => {
         );
     } catch (error) {
         console.log(
-            chalk.redBright(
-                `an error occurred: ${error}`
-            )
+            chalk.redBright(`an error occurred: ${error}`)
         );
         throw error;
     }
