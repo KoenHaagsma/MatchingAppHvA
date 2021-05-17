@@ -1,18 +1,22 @@
 doctype html
-html(lang='en')
+html(lang='nl')
     head
         meta(charset='utf-8')
-        title Matches
+        title Ontdekken
         style
             include ../public/css/style.css
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    
     body
         header
             include includes/header.pug
+        
         main
-            h1 Jouw matches
-            if errors
-                each error, i in errors
-                    div(class='alerts') #{error.msg}            
-            block content
+            section
+                h1 Ontdekken  
+                section
+                    block content
+        
         footer
             include includes/footer.pug
+        script(type='text/javascript' src='../public/js/app.js')

@@ -1,2 +1,30 @@
+// Colors
+
+$dark-main-color: #1a1a2e;
+$dark-secondary-color: #16213e;
+$accent-main-color: #e94560;
+$text-color-white: white;
+$code-color: #ffdf37;
+$yes-green: #5ce945;
+
+// Screen sizes
+$screen_size_large: 1199px;
+$screen_size_desktop: 991px;
+$screen_size_tablet: 812px;
+$screen_size_phone: 575px;
+
+// Global css
+
+html {
+    font-family: poppins, sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    background-color: $dark-main-color;
+    color: $text-color-white;
+    margin: 0px 32px;
+}
+
 @import "index.scss";
 @import "layout.scss";
+@import "header.scss";
+@import "typography.scss";

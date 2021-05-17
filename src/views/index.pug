@@ -3,12 +3,32 @@ extends layout
 block content
     ul
         each user, i in users
-            article 
+            article(class="match-article") 
                 li
-                    a(href=`/users/${user._id}`) #{user.firstName} #{user.lastName}
-                    br
-                    a(href=`/users/edit/${user._id}`) Edit 
-                    br
-                    a(href='#', data-id=user._id) Delete
-                    br
-                    br
+                    h2: a(href=`/users/${user._id}`) #{user.firstName} #{user.lastName}
+                    ul
+                        li: div(class="code"): code const code = "Code is geweldig"
+                        li(class="code-taal")
+                            ul 
+                                li
+                                    article 
+                                        div 
+                                            img(src="", alt="Code taal logo")
+                                            p HTML
+                                li
+                                    article 
+                                        div 
+                                            img(src="", alt="Code taal logo")
+                                            p CSS
+                                li
+                                    article 
+                                        div 
+                                            img(src="", alt="Code taal logo")
+                                            p JS
+                            div(class="meerLezen-container")
+                                button Meer lezen
+                        li: a(href=`/users/edit/${user._id}`) Edit 
+                        li: a(href='#', data-id=user._id) Delete
+                    div(class="button-container")
+                        button(class="negeer") Negeer
+                        button(class="accepteer") Accepteer
