@@ -1,9 +1,8 @@
 extends layout 
 
 block content
-    h3 #{title}: #{aantalMatches}
+    h3 #{title}
     ul(class="match-article-container")
-        h4 #{empty}
         each user, i in users
             article(class="match-article") 
                 li
@@ -29,7 +28,3 @@ block content
                                             p JS
                             div(class="meerLezen-container")
                                 button Meer lezen
-                    div(class="button-container")
-                        form(action=`/${user.id}` method="POST") 
-                            button(name="dislike" value="false" class="negeer") Negeer
-                            button(name="like" value="true" class="accepteer") Accepteer

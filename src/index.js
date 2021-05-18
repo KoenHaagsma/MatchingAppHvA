@@ -86,8 +86,8 @@ app.use(
 
 // User.insertMany([
 //     {
-//         firstName: "Test1",
-//         lastName: "Haagsma1",
+//         firstName: "LoggedInUser",
+//         lastName: "LoggedIn",
 //         code: "const code = 'I love code!'",
 //         codeInterests: ["PHP", "HTML", "CSS", "VUE"],
 //         matched: [],
@@ -169,24 +169,32 @@ app.get("/", (req, res) => {
                     }
                 }
             }
-            res.render("index", {
-                title: "Users",
-                users: matchedUsers,
-            });
+
+            if (matchedUsers.length === 0) {
+                res.render("index_empty", {
+                    title: "Matches",
+                    empty: "Oeps! Het lijkt erop dat je geen matches hebt.",
+                });
+            } else {
+                res.render("index", {
+                    title: "Matches",
+                    users: matchedUsers,
+                    aantalMatches: matchedUsers.length,
+                });
+            }
         }
     });
 });
 
 // Help: https://stackoverflow.com/questions/42075073/mongoose-how-to-update-an-user-info
 
-app.post("/:id", function (req, res) {
-    User.findById(req.params.id, function (err, user) {
+app.post("/:id", (req, res) => {
+    User.findById(req.params.id, (err, user) => {
         if (err) {
             console.log(err);
             return;
         } else if (req.body.like === "true") {
             loggedInUser.matched.push(user.id);
-
             User.findByIdAndUpdate(
                 req.params.id,
                 {
@@ -198,14 +206,12 @@ app.post("/:id", function (req, res) {
                         console.log(err);
                         return;
                     } else {
-                        console.log(result);
                         res.redirect("/");
                     }
                 }
             );
         } else if (req.body.dislike === "false") {
             loggedInUser.ignored.push(user.id);
-
             User.findByIdAndUpdate(
                 req.params.id,
                 {
@@ -217,7 +223,6 @@ app.post("/:id", function (req, res) {
                         console.log(err);
                         return;
                     } else {
-                        console.log(result);
                         res.redirect("/");
                     }
                 }
@@ -226,8 +231,34 @@ app.post("/:id", function (req, res) {
     });
 });
 
+// Help https://stackoverflow.com/questions/8303900/mongodb-mongoose-findmany-find-all-documents-with-ids-listed-in-array
+
+// My Matches route
+app.get("/matches", (req, res) => {
+    let matchedUsers = [];
+    loggedInUser.matched.forEach((user) => {
+        matchedUsers.push(user);
+    });
+    User.find(
+        {
+            _id: { $in: matchedUsers },
+        },
+        (err, users) => {
+            if (err) {
+                console.log(err);
+                res.redirect("/");
+            } else {
+                res.render("my_matches", {
+                    title: "Mijn Matches",
+                    users: users,
+                });
+            }
+        }
+    );
+});
+
 // All routes that have something to do with users
-app.use("/users", userRoutes);
+app.use("/user", userRoutes);
 
 // Handling 404
 app.use((req, res, next) => {
