@@ -81,12 +81,12 @@ main {
               background-color: transparent;
               color: #e94560;
               padding: 8px 12px; }
-        main section section .match-article-container .match-article .button-container {
+        main section section .match-article-container .match-article form {
           display: flex;
           flex-direction: row;
           justify-content: space-between;
           margin-top: 12px; }
-          main section section .match-article-container .match-article .button-container button {
+          main section section .match-article-container .match-article form button {
             font-weight: bold !important;
             cursor: pointer;
             font-size: 16px;
@@ -95,9 +95,9 @@ main {
             padding: 8px 12px;
             color: white;
             border: none; }
-          main section section .match-article-container .match-article .button-container .negeer {
+          main section section .match-article-container .match-article form .negeer {
             background-color: #e94560; }
-          main section section .match-article-container .match-article .button-container .accepteer {
+          main section section .match-article-container .match-article form .accepteer {
             background-color: #5ce945; }
 
 header {

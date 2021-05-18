@@ -37,10 +37,7 @@ app.use(
 );
 
 // Serving static files (CSS, IMG, JS, etc.)
-app.use(
-    "/assets",
-    express.static(path.join(__dirname, "public"))
-);
+app.use("/assets", express.static(path.join(__dirname, "public")));
 
 // Used validation from: https://github.com/elvc/node_express_pug_mongo/blob/master/app.js
 
@@ -60,10 +57,7 @@ app.use(
 // Messages middleware
 app.use(require("connect-flash")());
 app.use(function (req, res, next) {
-    res.locals.messages = require("express-messages")(
-        req,
-        res
-    );
+    res.locals.messages = require("express-messages")(req, res);
     next();
 });
 
@@ -92,10 +86,36 @@ app.use(
 
 // User.insertMany([
 //     {
-//         firstName: "Testing",
-//         lastName: "Goovert",
+//         firstName: "Test1",
+//         lastName: "Haagsma1",
 //         code: "const code = 'I love code!'",
-//         codeInterests: ["PHP"],
+//         codeInterests: ["PHP", "HTML", "CSS", "VUE"],
+//         matched: [],
+//         ignored: [],
+//     },
+//     {
+//         firstName: "Test2",
+//         lastName: "Haagsma2",
+//         code: "const code = 'I love code!'",
+//         codeInterests: ["PHP", "VUE"],
+//         matched: [],
+//         ignored: [],
+//     },
+//     {
+//         firstName: "Test3",
+//         lastName: "Haagsma3",
+//         code: "const code = 'I love code!'",
+//         codeInterests: ["VUE"],
+//         matched: [],
+//         ignored: [],
+//     },
+//     {
+//         firstName: "Test4",
+//         lastName: "Haagsma4",
+//         code: "const code = 'I love code!'",
+//         codeInterests: ["HTML5"],
+//         matched: [],
+//         ignored: [],
 //     },
 // ])
 //     .then(function () {
@@ -106,15 +126,18 @@ app.use(
 //     });
 
 let loggedInUser = {
+    _id: "60a7b57940fa35578c6e7c1v",
     firstName: "Koen",
     lastName: "Haagsma",
     code: "const code = 'I love code!'",
     codeInterests: ["HTML", "CSS", "JS", "PHP", "VUE"],
+    matched: [],
+    ignored: [],
 };
 
 // https://www.geeksforgeeks.org/how-to-find-if-two-arrays-contain-any-common-item-in-javascript/
 
-// Toevoegen dat als de user geliked is dat hij naar matches gaat maar dat hij uit de lijst van ontdekken verwijderd
+// TODO: Toevoegen dat als de user geliked is dat hij naar matches gaat maar dat hij uit de lijst van ontdekken verwijderd
 
 // Routes
 // Home Route
@@ -123,28 +146,82 @@ app.get("/", (req, res) => {
         if (err) {
             res.status(404).render("404");
         } else {
-            let matchedUsers = [];
-            function findCommonElements(arr2, arr1) {
-                return arr1.some((item) =>
-                    arr2.includes(item)
-                );
-            }
-            users.forEach((user) => {
+            const filteredUsers = users.filter((user) => {
                 if (
-                    findCommonElements(
-                        loggedInUser.codeInterests,
-                        user.codeInterests
+                    !(
+                        loggedInUser.matched.includes(user._id.toString()) ||
+                        loggedInUser.ignored.includes(user._id.toString())
                     )
                 ) {
-                    matchedUsers.push(user);
-                } else {
-                    return;
+                    return user;
                 }
             });
+            let matchedUsers = [];
+            for (const user of filteredUsers) {
+                let count = 0;
+                for (const interest of user.codeInterests) {
+                    if (loggedInUser.codeInterests.includes(interest)) {
+                        count++;
+                    }
+                    if (count >= 2) {
+                        matchedUsers.push(user);
+                        break; // ga naar volgende user
+                    }
+                }
+            }
             res.render("index", {
                 title: "Users",
                 users: matchedUsers,
             });
+        }
+    });
+});
+
+// Help: https://stackoverflow.com/questions/42075073/mongoose-how-to-update-an-user-info
+
+app.post("/:id", function (req, res) {
+    User.findById(req.params.id, function (err, user) {
+        if (err) {
+            console.log(err);
+            return;
+        } else if (req.body.like === "true") {
+            loggedInUser.matched.push(user.id);
+
+            User.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $push: { matched: loggedInUser._id },
+                },
+                { new: true },
+                function (err, result) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    } else {
+                        console.log(result);
+                        res.redirect("/");
+                    }
+                }
+            );
+        } else if (req.body.dislike === "false") {
+            loggedInUser.ignored.push(user.id);
+
+            User.findByIdAndUpdate(
+                req.params.id,
+                {
+                    $push: { ignored: loggedInUser._id },
+                },
+                { new: true },
+                function (err, result) {
+                    if (err) {
+                        console.log(err);
+                        return;
+                    } else {
+                        console.log(result);
+                        res.redirect("/");
+                    }
+                }
+            );
         }
     });
 });
@@ -160,7 +237,5 @@ app.use((req, res, next) => {
 
 // Start Server
 app.listen(port, () => {
-    console.log(
-        chalk.blue(`Listening at http://localhost:${port}`)
-    );
+    console.log(chalk.blue(`Listening at http://localhost:${port}`));
 });

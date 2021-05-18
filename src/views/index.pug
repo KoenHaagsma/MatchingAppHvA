@@ -29,5 +29,6 @@ block content
                             div(class="meerLezen-container")
                                 button Meer lezen
                     div(class="button-container")
-                        button(class="negeer") Negeer
-                        button(class="accepteer") Accepteer
+                        form(action=`/${user.id}` method="POST") 
+                            button(name="dislike" value="false" class="negeer") Negeer
+                            button(name="like" value="true" class="accepteer") Accepteer

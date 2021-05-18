@@ -7,6 +7,7 @@ const userSchema = new mongoose.Schema(
         code: String,
         codeInterests: [String],
         matched: [String],
+        ignored: [String],
     },
     { timestamps: true, typeKey: "$type" }
 );
