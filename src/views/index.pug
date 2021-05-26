@@ -9,24 +9,15 @@ block content
                 li
                     h2: a(href=`/users/${user._id}`) #{user.firstName} #{user.lastName}
                     ul
-                        li: div(class="code"): code const code = "Code is geweldig"
+                        li: div(class="code"): code #{user.code}
                         li(class="code-taal")
+                            p(class="interesses-section") Interesses:
                             ul 
-                                li
-                                    article 
-                                        div 
-                                            img(src="", alt="Code taal logo")
-                                            p HTML
-                                li
-                                    article 
-                                        div 
-                                            img(src="", alt="Code taal logo")
-                                            p CSS
-                                li
-                                    article 
-                                        div 
-                                            img(src="", alt="Code taal logo")
-                                            p JS
+                                each codeInterest, i in user.codeInterests
+                                    li
+                                        article
+                                            div 
+                                                p #{codeInterest}
                             div(class="meerLezen-container")
                                 button Meer lezen
                     div(class="button-container")

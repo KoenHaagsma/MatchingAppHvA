@@ -8,11 +8,11 @@ html {
 
 @media screen and (min-width: 1199px) {
   html {
-    margin: 0 225px; } }
+    margin: 0 500px; } }
 
 main {
   margin-top: 24px; }
-  main section h1 {
+  main section h3 {
     width: 100%;
     font-weight: 500;
     font-size: 24px;
@@ -56,15 +56,18 @@ main {
           font-weight: 300;
           color: #ffdf37; }
         main section section .match-article-container .match-article .code-taal {
-          margin-top: 14px;
           padding: 8px; }
+          main section section .match-article-container .match-article .code-taal .interesses-section {
+            padding: 0 !important;
+            margin: 0 !important; }
           main section section .match-article-container .match-article .code-taal ul {
             display: flex; }
             main section section .match-article-container .match-article .code-taal ul div {
+              padding: 0px 12px;
               display: flex;
               flex-direction: column; }
               main section section .match-article-container .match-article .code-taal ul div p {
-                font-size: 10px;
+                font-size: 16px;
                 font-weight: 300;
                 line-height: 15px; }
           main section section .match-article-container .match-article .code-taal .meerLezen-container {
@@ -120,7 +123,7 @@ header {
         header nav ul li a {
           font-weight: bold !important;
           text-decoration: none;
-          font-size: 12px;
+          font-size: 16px;
           color: white; }
       header nav ul li:active,
       header nav ul li:hover,

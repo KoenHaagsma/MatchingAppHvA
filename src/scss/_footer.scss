@@ -1,9 +1,11 @@
 footer {
+    padding-top: 64px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     p {
         font-size: 16px;
+        border-top: 2px solid $accent-main-color;
     }
 }

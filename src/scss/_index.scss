@@ -1,7 +1,7 @@
 main {
     margin-top: 24px;
     section {
-        h1 {
+        h3 {
             width: 100%;
             font-weight: 500;
             font-size: 24px;
@@ -50,15 +50,19 @@ main {
                         color: $code-color;
                     }
                     .code-taal {
-                        margin-top: 14px;
                         padding: 8px;
+                        .interesses-section {
+                            padding: 0 !important;
+                            margin: 0 !important;
+                        }
                         ul {
                             display: flex;
                             div {
+                                padding: 0px 12px;
                                 display: flex;
                                 flex-direction: column;
                                 p {
-                                    font-size: 10px;
+                                    font-size: 16px;
                                     font-weight: 300;
                                     line-height: 15px;
                                 }
@@ -74,8 +78,7 @@ main {
                                 cursor: pointer;
                                 font-size: 16px;
                                 border-radius: 4px;
-                                border: 2px solid
-                                    $accent-main-color;
+                                border: 2px solid $accent-main-color;
                                 background-color: transparent;
                                 color: $accent-main-color;
                                 padding: 8px 12px;

@@ -1,6 +1,5 @@
 // Requirements
 const express = require("express");
-const pug = require("pug");
 const chalk = require("chalk");
 require("dotenv").config();
 const path = require("path");
@@ -44,9 +43,9 @@ app.use("/assets", express.static(path.join(__dirname, "public")));
 // Session middleware
 app.use(
     session({
-        cookie: { maxAge: 86400000 },
+        cookie: { maxAge: 3600000 },
         store: new MemoryStore({
-            checkPeriod: 86400000,
+            checkPeriod: 3600000,
         }),
         secret: "new_text",
         resave: true,
@@ -83,47 +82,6 @@ app.use(
         },
     })
 );
-
-// User.insertMany([
-//     {
-//         firstName: "LoggedInUser",
-//         lastName: "LoggedIn",
-//         code: "const code = 'I love code!'",
-//         codeInterests: ["PHP", "HTML", "CSS", "VUE"],
-//         matched: [],
-//         ignored: [],
-//     },
-//     {
-//         firstName: "Test2",
-//         lastName: "Haagsma2",
-//         code: "const code = 'I love code!'",
-//         codeInterests: ["PHP", "VUE"],
-//         matched: [],
-//         ignored: [],
-//     },
-//     {
-//         firstName: "Test3",
-//         lastName: "Haagsma3",
-//         code: "const code = 'I love code!'",
-//         codeInterests: ["VUE"],
-//         matched: [],
-//         ignored: [],
-//     },
-//     {
-//         firstName: "Test4",
-//         lastName: "Haagsma4",
-//         code: "const code = 'I love code!'",
-//         codeInterests: ["HTML5"],
-//         matched: [],
-//         ignored: [],
-//     },
-// ])
-//     .then(function () {
-//         console.log("Data inserted"); // Success
-//     })
-//     .catch(function (error) {
-//         console.log(error); // Failure
-//     });
 
 let loggedInUser = {
     _id: "60a7b57940fa35578c6e7c1v",
@@ -165,7 +123,7 @@ app.get("/", (req, res) => {
                     }
                     if (count >= 2) {
                         matchedUsers.push(user);
-                        break; // ga naar volgende user
+                        break;
                     }
                 }
             }
@@ -173,7 +131,7 @@ app.get("/", (req, res) => {
             if (matchedUsers.length === 0) {
                 res.render("index_empty", {
                     title: "Matches",
-                    empty: "Oeps! Het lijkt erop dat je geen matches hebt.",
+                    empty: "Oeps! Het lijkt erop dat je niet gematched bent aan een andere persoon.",
                 });
             } else {
                 res.render("index", {
@@ -248,10 +206,17 @@ app.get("/matches", (req, res) => {
                 console.log(err);
                 res.redirect("/");
             } else {
-                res.render("my_matches", {
-                    title: "Mijn Matches",
-                    users: users,
-                });
+                if (matchedUsers.length === 0) {
+                    res.render("my_matches_empty", {
+                        title: "Mijn Matches",
+                        empty: "Oeps! Het lijkt erop dat je nog geen matches hebt geaccepteerd.",
+                    });
+                } else {
+                    res.render("my_matches", {
+                        title: "Mijn Matches",
+                        users: users,
+                    });
+                }
             }
         }
     );
