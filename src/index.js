@@ -64,38 +64,18 @@ app.use(function (req, res, next) {
 // https://stackoverflow.com/questions/56733975/express-validator-error-expressvalidator-is-not-a-function
 // https://github.com/express-validator/express-validator/issues/735
 
-app.use(
-    expressValidator({
-        errorFormatter: function (param, msg, value) {
-            var namespace = param.split("."),
-                root = namespace.shift(),
-                formParam = root;
-
-            while (namespace.length) {
-                formParam += "[" + namespace.shift() + "]";
-            }
-            return {
-                param: formParam,
-                msg: msg,
-                value: value,
-            };
-        },
-    })
-);
-
+// Temporary logged in user
 let loggedInUser = {
     _id: "60a7b57940fa35578c6e7c1v",
     firstName: "Koen",
     lastName: "Haagsma",
     code: "const code = 'I love code!'",
-    codeInterests: ["HTML", "CSS", "JS", "PHP", "VUE"],
+    codeInterests: ["CSS", "RUBY"],
     matched: [],
     ignored: [],
 };
 
 // https://www.geeksforgeeks.org/how-to-find-if-two-arrays-contain-any-common-item-in-javascript/
-
-// TODO: Toevoegen dat als de user geliked is dat hij naar matches gaat maar dat hij uit de lijst van ontdekken verwijderd
 
 // Routes
 // Home Route
@@ -145,6 +125,8 @@ app.get("/", (req, res) => {
 });
 
 // Help: https://stackoverflow.com/questions/42075073/mongoose-how-to-update-an-user-info
+
+// TODO: als user al in de database staat niet toevoegen even checken.
 
 app.post("/:id", (req, res) => {
     User.findById(req.params.id, (err, user) => {
@@ -226,6 +208,7 @@ app.get("/matches", (req, res) => {
 app.use("/user", userRoutes);
 
 // Handling 404
+// TODO: Even kijken of ik use moet gebruiken of iets anders.
 app.use((req, res, next) => {
     res.status(404).render("404");
     next();

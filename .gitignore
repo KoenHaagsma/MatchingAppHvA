@@ -108,3 +108,5 @@ dist
 # Folder
 Per_week_Issue_md/
 
+
+*.zip
